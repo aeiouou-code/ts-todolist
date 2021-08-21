@@ -1,8 +1,8 @@
 # ts-todolist
 
-### ✔️ **배포 주소**
+### ✔️ **구현 화면**
+![todolist](https://user-images.githubusercontent.com/82940748/130325452-9cbfb5f5-ce66-4a81-8286-8d05fd0934ac.gif)
 
-👉
 
 ### ✔️ **구현 사항**
 
