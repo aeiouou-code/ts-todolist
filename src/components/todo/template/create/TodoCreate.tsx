@@ -69,6 +69,7 @@ const TodoCreate = ({
 }: TodoCreateProps) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
+  const [dateSelected, setDateSelected] = useState("");
 
   const handleToggle = () => setOpen(!open);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -77,16 +78,30 @@ const TodoCreate = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // 새로고침 방지
 
-    createTodo({
-      id: nextId,
-      text: value,
-      done: false,
-    });
-    incrementNextId(); // nextId 하나 증가
+    if (value) {
+      createTodo({
+        id: nextId,
+        text: value,
+        done: false,
+        dueDate: dateSelected,
+      });
+      incrementNextId(); // nextId 하나 증가
 
-    setValue(""); // input 초기화
+      setValue(""); // input 초기화
+    } else {
+      Modal.error({
+        title: "error",
+        content: "error",
+      });
+      return;
+    }
     setOpen(false); // open 닫기
   };
+
+  function handleDate(_: any, dateString: string) {
+    setDateSelected(dateString);
+    return dateSelected;
+  }
 
   return (
     <>
@@ -103,7 +118,7 @@ const TodoCreate = ({
             <PlusCircleOutlined />
           </CircleButton>
         </InsertForm>
-        <DueDate />
+        <DueDate onChange={handleDate} />
       </InsertFormPositioner>
     </>
   );
