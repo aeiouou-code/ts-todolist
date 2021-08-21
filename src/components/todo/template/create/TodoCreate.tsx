@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { PlusCircleOutlined } from "@ant-design/icons";
+import { Modal, DatePicker } from "antd";
 import { Itodo } from "components/todo/TodoService";
 
 const CircleButton = styled.button<{ open: boolean }>`
@@ -22,17 +23,18 @@ const CircleButton = styled.button<{ open: boolean }>`
 `;
 
 const InsertFormPositioner = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  padding: 0px 60px 30px 40px;
+  background: #eeeeee;
   border-bottom: 1px solid #eeeeee;
 `;
 
 const InsertForm = styled.form`
   display: flex;
   background: #eeeeee;
-  padding-left: 40px;
-  padding-top: 36px;
-  padding-right: 60px;
-  padding-bottom: 36px;
+  padding: 36px 0px 15px 0px;
 `;
 
 const Input = styled.input`
@@ -49,6 +51,11 @@ const Input = styled.input`
   }
 `;
 
+const DueDate = styled(DatePicker)`
+  width: 200px;
+  height: 40px;
+`;
+
 interface TodoCreateProps {
   nextId: number;
   createTodo: (todo: Itodo) => void;
@@ -58,7 +65,7 @@ interface TodoCreateProps {
 const TodoCreate = ({
   nextId,
   createTodo,
-  incrementNextId
+  incrementNextId,
 }: TodoCreateProps) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -73,7 +80,7 @@ const TodoCreate = ({
     createTodo({
       id: nextId,
       text: value,
-      done: false
+      done: false,
     });
     incrementNextId(); // nextId 하나 증가
 
@@ -96,6 +103,7 @@ const TodoCreate = ({
             <PlusCircleOutlined />
           </CircleButton>
         </InsertForm>
+        <DueDate />
       </InsertFormPositioner>
     </>
   );
