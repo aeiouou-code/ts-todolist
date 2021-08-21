@@ -90,8 +90,8 @@ const TodoCreate = ({
       setValue(""); // input 초기화
     } else {
       Modal.error({
-        title: "error",
-        content: "error",
+        title: "Error",
+        content: "Please write down your plans!",
       });
       return;
     }
